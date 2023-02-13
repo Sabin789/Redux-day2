@@ -2,9 +2,9 @@
 import { ADD_TO_FAVOURITE,REMOVE_FROM_FAVOURITE} from "../actions"
 
 const initialState = {
-  favourite: {
+  
     list: [],
-  },
+
 }
 
 const FavouriteReducer = (state = initialState, action) => {
@@ -12,18 +12,17 @@ const FavouriteReducer = (state = initialState, action) => {
     case ADD_TO_FAVOURITE:
       return {
         ...state,
-        favourite: {
-          ...state.favourite,
-          list: [...state.favourite.list, action.payload],
-        },
+ 
+
+          list: [...state.list, action.payload],
+     
       }
     case REMOVE_FROM_FAVOURITE:
       return {
         ...state,
-        favourite: {
-          ...state.favourite,
-          list: state.favourite.list.filter((fav) => fav !== action.payload),
-        },
+      
+          list: state.list.filter((fav) => fav !== action.payload),
+    
       }
     default:
       return state

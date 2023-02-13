@@ -3,7 +3,10 @@ import FavouriteReducer from '../reducers/FavouriteReducer'
 import SearchReducer from '../reducers/SearchReducer'
 
 const store = configureStore({
-  reducer: FavouriteReducer
+  reducer: combineReducers({
+    favourite: FavouriteReducer,
+    queryList:SearchReducer
+  })
 })
 
 export default store
