@@ -10,7 +10,7 @@ export const addToFavouritesAction=(fav)=>({
             payload:fav,
             //Payload is the name of the prop holding any ohter neccesary piece
            //  of info to make the action work
-            
+       
          
    })
    export const removeFromFavouritesAction=(fav)=>(
@@ -30,7 +30,14 @@ export const addToFavouritesAction=(fav)=>({
 //      }
 //    }
 
-export const fetchJobsAction=( dispacth,getState,query)=>{
+export const setUsername = (name) => {
+    return {
+      type: SET_USERNAME,
+      payload: name,
+    }
+  }
+
+export const fetchJobsAction=( query,dispatch)=>{
 
     return async() =>{
     
@@ -38,12 +45,16 @@ export const fetchJobsAction=( dispacth,getState,query)=>{
             const response = await fetch('https://strive-benchmark.herokuapp.com/api/jobs?search=' + query + '&limit=20')
             if (response.ok) {
                 
-              const { data } = await response.json()
-              let jobs=data
-              dispacth({
+              let { data } = await response.json()
+             console.log("succes")
+             console.log(query)
+             let jobs=data
+              dispatch({
                 type:GET_JOBS,
                 payload:jobs
+   
               })
+  
             } else {
               alert('Error fetching results')
             }

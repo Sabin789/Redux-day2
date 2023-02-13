@@ -13,7 +13,7 @@ const FavouriteReducer = (state = initialState, action) => {
       return {
         ...state,
  
-
+        
           list: [...state.list, action.payload],
      
       }

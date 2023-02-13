@@ -33,7 +33,8 @@ const reduxJobs= useSelector((state)=>state.queryList)
   //   }
   // }
 // useEffect(()=>{
-//   dispatch(fetchJobsAction())
+
+//   dispatch(fetchJobsAction(params.companyName))
 // })
   return (
     <Container>
