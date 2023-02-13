@@ -1,7 +1,7 @@
 
 export const ADD_TO_FAVOURITE="ADD_TO_FAVOURITE"
 export const REMOVE_FROM_FAVOURITE="REMOVE_FROM_FAVOURITE"
-export const SET_USERNAME ="SET-USERNAME"
+export const SET_USERNAME ="SET_USERNAME"
 export const GET_JOBS="GET_JOBS"
 
 export const addToFavouritesAction=(fav)=>({
@@ -31,11 +31,11 @@ export const addToFavouritesAction=(fav)=>({
 //    }
 
 export const setUsername = (name) => {
-    return {
-      type: SET_USERNAME,
-      payload: name,
-    }
+  return {
+    type: SET_USERNAME,
+    payload: name,
   }
+}
 
 export const fetchJobsAction=( query,dispatch)=>{
 
