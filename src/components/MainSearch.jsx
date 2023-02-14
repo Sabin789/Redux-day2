@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { fetchJobsAction } from '../redux/actions'
+import { fetchJobsAction, start } from '../redux/actions'
 import { setUsername } from '../redux/actions'
 import { logOut } from '../redux/actions'
 import Job from './Job'
@@ -14,7 +14,7 @@ const MainSearch = () => {
   let dispatch=useDispatch()
   const [query, setQuery] = useState('')
 
- let jobs=useSelector((state)=>state.allJobs.queryList)
+ let reduxJobs=useSelector((state)=>state.allJobs.queryList)
   const navigate = useNavigate()
   const userName = useSelector((state) => state.user.name)
   const [inputValue, setInputValue] = useState('')
@@ -29,9 +29,14 @@ const MainSearch = () => {
   const handleSubmit =  (e) => {
     e.preventDefault()
     dispatch(fetchJobsAction(query,dispatch))
-   
+    
    
   }
+
+
+ useEffect(()=>{
+  dispatch(start())
+ },[])
 
   return (
     <Container >
@@ -70,16 +75,27 @@ const MainSearch = () => {
             />
           </Form>
         </Col>
-        {!error ?
+        
+        {spinner ?  
+        
+        <div>
+          <br />
+                <Spinner animation="border" role="status"/>
+                </div>
+        
+        :""}{!error ?
+         
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
+          {reduxJobs&& reduxJobs.map((jobData) => (
             <Job key={jobData._id} data={jobData} />
           ))}
         </Col>
+          
         :
          <Alert className='ml-5' variant='danger'> Oops something went wrong</Alert>
-
+          
           }
+        
       </Row>
     </Container>
   )

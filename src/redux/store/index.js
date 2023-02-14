@@ -9,6 +9,8 @@ import {
 } from 'redux-persist';
  import {encryptTransform} from "redux-persist-transform-encrypt"
  const secretKey=process.env.REACT_APP_ENV_SECRET_KEY
+
+ 
 const persistConfig ={
   key:"root",
 

@@ -6,6 +6,16 @@ export const GET_JOBS="GET_JOBS"
 export const LOG_OUT="LOG_OUT"
 export const GET_JOBS_LOADING="GET_JOBS_LOADING"
 export const BOOKS_ERROR="ERROR"
+export const START="START"
+
+
+export const start=()=>({
+  type:START,
+  payload:""
+})
+
+
+
 export const addToFavouritesAction=(fav)=>({
 
            type:ADD_TO_FAVOURITE,
@@ -35,9 +45,9 @@ export const logOut =()=>{
   }
 }
 export const fetchJobsAction=( query,dispatch)=>{
-
+ 
     return async() =>{
-    
+          
         try {
             const response = await fetch('https://strive-benchmark.herokuapp.com/api/jobs?search=' + query + '&limit=20')
             if (response.ok) {
@@ -47,12 +57,17 @@ export const fetchJobsAction=( query,dispatch)=>{
              console.log(query)
              let jobs=data
 
+             dispatch({
+              type:GET_JOBS_LOADING,
+              payload:true
+            })
+         
               dispatch({
                 type:GET_JOBS,
                 payload:jobs
    
               })
-  
+              
               dispatch({
                 type:GET_JOBS_LOADING,
                 payload:false

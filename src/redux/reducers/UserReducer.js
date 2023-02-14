@@ -2,7 +2,8 @@ import { LOG_OUT, SET_USERNAME } from "../actions";
 
 
 const initialState = {
-    name: '',
+    name: "",
+    isLoading:false
   }
 
 const UserReducer = (state = initialState, action) => {

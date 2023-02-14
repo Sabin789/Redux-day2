@@ -1,4 +1,4 @@
-import { GET_JOBS,GET_JOBS_LOADING,BOOKS_ERROR } from "../actions"
+import { GET_JOBS,GET_JOBS_LOADING,BOOKS_ERROR, START } from "../actions"
 
 const initialState = {
 
@@ -26,6 +26,11 @@ const initialState = {
             ...state,
             isError:action.payload
           }
+          case START:
+            return{
+              ...state,
+         queryList:action.payload
+            }
 
          default:return state
     }

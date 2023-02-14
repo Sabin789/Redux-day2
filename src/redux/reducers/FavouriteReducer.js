@@ -4,6 +4,7 @@ import { ADD_TO_FAVOURITE,REMOVE_FROM_FAVOURITE} from "../actions"
 const initialState = {
   
     list: [],
+    isLoading:false
 
 }
 
