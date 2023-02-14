@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Favourites from './components/Favourites'
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>

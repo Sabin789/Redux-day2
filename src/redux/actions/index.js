@@ -3,7 +3,9 @@ export const ADD_TO_FAVOURITE="ADD_TO_FAVOURITE"
 export const REMOVE_FROM_FAVOURITE="REMOVE_FROM_FAVOURITE"
 export const SET_USERNAME ="SET_USERNAME"
 export const GET_JOBS="GET_JOBS"
-
+export const LOG_OUT="LOG_OUT"
+export const GET_JOBS_LOADING="GET_JOBS_LOADING"
+export const BOOKS_ERROR="ERROR"
 export const addToFavouritesAction=(fav)=>({
 
            type:ADD_TO_FAVOURITE,
@@ -19,16 +21,6 @@ export const addToFavouritesAction=(fav)=>({
         payload: fav,
       }
    )
-   //Tey are the same thing
-
-
-//THi sis the better way to make the actions retrun funcs notobjects
-//    export const addToCartActionAsync=()=>{
-//      return async(dispacth,getState)=>{
- //If redux sees a function is being returned it automatically injects two
- //args in the func dispacth() and getstate
-//      }
-//    }
 
 export const setUsername = (name) => {
   return {
@@ -36,7 +28,12 @@ export const setUsername = (name) => {
     payload: name,
   }
 }
-
+export const logOut =()=>{
+  return{
+    type:LOG_OUT,
+    payload:null
+  }
+}
 export const fetchJobsAction=( query,dispatch)=>{
 
     return async() =>{
@@ -49,17 +46,43 @@ export const fetchJobsAction=( query,dispatch)=>{
              console.log("succes")
              console.log(query)
              let jobs=data
+
               dispatch({
                 type:GET_JOBS,
                 payload:jobs
    
               })
   
+              dispatch({
+                type:GET_JOBS_LOADING,
+                payload:false
+              })
+              dispatch({
+                type:BOOKS_ERROR,
+                payload:false
+              })
+
             } else {
-              alert('Error fetching results')
+
+              dispatch({
+                type:GET_JOBS_LOADING,
+                payload:false
+              })
+              dispatch({
+                type:BOOKS_ERROR,
+                payload:true
+              })
+              
             }
           } catch (error) {
-            console.log(error)
+            dispatch({
+              type:GET_JOBS_LOADING,
+              payload:false
+            })
+            dispatch({
+              type:BOOKS_ERROR,
+              payload:true
+            })
           }
         }
 }
